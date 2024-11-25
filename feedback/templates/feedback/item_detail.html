@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ item.name }} - Feedback</title>
+</head>
+<body>
+    <h1>{{ item.name }}</h1>
+    <p>Average Rating: {{ average_rating }}</p>
+    
+    <h2>Feedback</h2>
+    <ul>
+        {% for feedback in feedback_list %}
+            <li>{{ feedback.comment }} (Rating: {{ feedback.rating }}/5)</li>
+        {% empty %}
+            <li>No feedback yet.</li>
+        {% endfor %}
+    </ul>
+    
+    <h3>Submit Feedback</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
